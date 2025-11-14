@@ -237,7 +237,7 @@ class _ShopPageState extends State<ShopPage> {
         showBackButton: false,
         actions: [
           IconButton(
-            icon: const Icon(Icons.menu_rounded),
+            icon: const Icon(Icons.filter_list),
             onPressed: _showFilterDialog,
             color: FortniteTheme.textPrimary,
           ),

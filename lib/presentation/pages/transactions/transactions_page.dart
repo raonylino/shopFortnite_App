@@ -40,9 +40,20 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
           if (state is TransactionsLoaded) {
             if (state.transactions.isEmpty) {
-              return const EmptyStateWidget(
-                message: 'Nenhuma transação encontrada',
-                icon: Icons.receipt_long_outlined,
+              return RefreshIndicator(
+                onRefresh: () async {
+                  await context.read<TransactionsCubit>().refresh();
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height - 200,
+                    child: const EmptyStateWidget(
+                      message: 'Nenhuma transação encontrada',
+                      icon: Icons.receipt_long_outlined,
+                    ),
+                  ),
+                ),
               );
             }
 

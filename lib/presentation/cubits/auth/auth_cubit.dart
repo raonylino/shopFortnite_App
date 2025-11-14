@@ -27,10 +27,8 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  // Helper para limpar mensagens de erro
   String _cleanErrorMessage(dynamic error) {
     String message = error.toString();
-    // Remove prefixos comuns de Exception
     message = message.replaceFirst('Exception: ', '');
     message = message.replaceFirst('Error: ', '');
     return message;

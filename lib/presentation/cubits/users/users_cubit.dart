@@ -7,7 +7,6 @@ class UsersCubit extends Cubit<UsersState> {
 
   UsersCubit(this._userRepository) : super(UsersInitial());
 
-  // Helper para limpar mensagens de erro
   String _cleanErrorMessage(dynamic error) {
     String message = error.toString();
     message = message.replaceFirst('Exception: ', '');

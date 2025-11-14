@@ -7,7 +7,6 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   ProfileCubit(this._userRepository) : super(ProfileInitial());
 
-  // Helper para limpar mensagens de erro
   String _cleanErrorMessage(dynamic error) {
     String message = error.toString();
     message = message.replaceFirst('Exception: ', '');

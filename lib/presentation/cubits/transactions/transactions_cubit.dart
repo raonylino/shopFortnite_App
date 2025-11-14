@@ -7,7 +7,6 @@ class TransactionsCubit extends Cubit<TransactionsState> {
 
   TransactionsCubit(this._repository) : super(const TransactionsInitial());
 
-  // Helper para limpar mensagens de erro
   String _cleanErrorMessage(dynamic error) {
     String message = error.toString();
     message = message.replaceFirst('Exception: ', '');

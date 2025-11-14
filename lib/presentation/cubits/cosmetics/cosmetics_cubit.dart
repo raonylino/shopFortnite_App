@@ -8,7 +8,6 @@ class CosmeticsCubit extends Cubit<CosmeticsState> {
 
   CosmeticsCubit(this._cosmeticsRepository) : super(CosmeticsInitial());
 
-  // Helper para limpar mensagens de erro
   String _cleanErrorMessage(dynamic error) {
     String message = error.toString();
     message = message.replaceFirst('Exception: ', '');
@@ -42,9 +41,11 @@ class CosmeticsCubit extends Cubit<CosmeticsState> {
 
     try {
       final cosmetics = await _cosmeticsRepository.getCosmetics();
-
-      // Apply filters
       List<CosmeticModel> filteredCosmetics = cosmetics;
+
+      filteredCosmetics = filteredCosmetics
+          .where((c) => c.name.isNotEmpty && c.name.toLowerCase() != 'null')
+          .toList();
 
       if (name != null && name.isNotEmpty) {
         filteredCosmetics = filteredCosmetics
@@ -87,14 +88,10 @@ class CosmeticsCubit extends Cubit<CosmeticsState> {
     }
   }
 
-  // Load more cosmetics (pagination) - Not applicable for single API response
   Future<void> loadMoreCosmetics() async {
-    // Since we load all items at once, pagination is not applicable
-    // This method is kept for interface compatibility but does nothing
     return;
   }
 
-  // Purchase cosmetic
   Future<void> purchaseCosmetic(String cosmeticId) async {
     emit(CosmeticPurchaseLoading());
     try {
@@ -130,7 +127,6 @@ class CosmeticsCubit extends Cubit<CosmeticsState> {
       final response = await _cosmeticsRepository.returnCosmetic(cosmeticId);
       emit(CosmeticPurchaseSuccess(response.message));
 
-      // Reload cosmetics to update the list
       await loadCosmetics(
         name: _currentName,
         type: _currentType,

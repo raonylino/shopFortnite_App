@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fortnite_flutter/core/theme/fortnite_theme.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LoadingWidget extends StatelessWidget {
@@ -63,9 +64,10 @@ class LoadingIndicator extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircularProgressIndicator(
-            color: FortniteTheme.primaryBlue,
-            strokeWidth: 3,
+          LoadingAnimationWidget.flickr(
+            leftDotColor: FortniteTheme.primaryPurple,
+            rightDotColor: FortniteTheme.primaryBlue,
+            size: 40,
           ),
           if (message != null) ...[
             const SizedBox(height: 16),

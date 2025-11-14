@@ -33,7 +33,6 @@ class TransactionModel extends Equatable {
   });
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) {
-    // Helper para converter int ou String para String
     String parseValue(dynamic value) {
       if (value == null) return '';
       if (value is String) return value;
